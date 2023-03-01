@@ -1,1 +1,14 @@
-<p>festival-details works!</p>
+<h1>festival-details works!</h1>
+
+<input type="text" [formControl]="nameControl" (change)="onNameChange()" >
+
+<button (click)="onNameChange()">Changer nom festival</button>
+
+<form [formGroup]="festivalGroup" (ngSubmit)="update()">
+  <label>Name: <input type="text" formControlName="name"></label>
+  <label>Entrance: <input type="number"
+                          formControlName="entrancePrice"></label>
+  <label>Room: <input type="number"
+                          formControlName="room"></label>
+  <button type="submit" [disabled]="!festivalGroup.valid">Submit</button>
+</form>

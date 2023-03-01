@@ -1,4 +1,4 @@
-<p>festivals-list works!</p>
+<h1>Festivals-list works!</h1>
 
 <table>
   <tr>
@@ -14,6 +14,7 @@
     <th># tables enthée</th>
     <th># tables salle</th>
     <th># tables buvette</th>
+    <th>Selectionner festival</th>
   </tr>
   <tr *ngFor="let fest of festivals">
     <td>{{fest.id}}</td>
@@ -28,5 +29,6 @@
     <td>{{fest.tableprice_1}}</td>
     <td>{{fest.tableprice_2}}</td>
     <td>{{fest.tableprice_3}}</td>
+    <td><button (click)="selectFestival(fest)">Selectionner</button></td>
   </tr>
 </table>

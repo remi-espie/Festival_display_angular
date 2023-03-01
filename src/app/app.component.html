@@ -1,3 +1,7 @@
-<app-festivals-list [festivals]="festivals">
+<app-festivals-list [festivals]="festivals" (festivalSelect)="festivalChange($event)">
 
 </app-festivals-list>
+
+<app-festival-details [festival]="festivalSelect"></app-festival-details>
+
+<app-message></app-message>

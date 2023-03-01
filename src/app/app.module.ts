@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { FestivalsListComponent } from './components/festival/festivals-list/festivals-list.component';
 import { FestivalDetailsComponent } from './components/festival/festival-details/festival-details.component';
 import { MessageComponent } from './components/shared/message/message.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MessageComponent } from './components/shared/message/message.component'
     MessageComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,5 @@
-<p>message works!</p>
+<h1>Logs</h1>
+
+<button (click)="clear()">Clear</button>
+
+<p *ngFor="let mess of message">{{mess}}</p>
