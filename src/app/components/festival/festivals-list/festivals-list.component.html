@@ -1,1 +1,32 @@
 <p>festivals-list works!</p>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>tables</th>
+    <th>Prix enthée</th>
+    <th>Prix salle</th>
+    <th>Prix buvette</th>
+    <th>m2 enthée</th>
+    <th>m2 salle</th>
+    <th>m2 buvette</th>
+    <th># tables enthée</th>
+    <th># tables salle</th>
+    <th># tables buvette</th>
+  </tr>
+  <tr *ngFor="let fest of festivals">
+    <td>{{fest.id}}</td>
+    <td>{{fest.name}}</td>
+    <td>{{fest.tableTotal}}</td>
+    <td>{{fest.tableprice_1}}</td>
+    <td>{{fest.tablebooked_2}}</td>
+    <td>{{fest.tableprice_3}}</td>
+    <td>{{fest.sqmprice_1}}</td>
+    <td>{{fest.sqmprice_2}}</td>
+    <td>{{fest.sqmprice_3}}</td>
+    <td>{{fest.tableprice_1}}</td>
+    <td>{{fest.tableprice_2}}</td>
+    <td>{{fest.tableprice_3}}</td>
+  </tr>
+</table>

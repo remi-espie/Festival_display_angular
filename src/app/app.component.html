@@ -1,9 +1,3 @@
-<div>
+<app-festivals-list [festivals]="festivals">
 
-  <h1>Nombre de festivals: {{festival.length}}</h1>
-  <ul>
-    <li *ngFor="let fest of festival"><h4>{{fest.name}}, {{fest.tables}}</h4></li>
-  </ul>
-  <button (click)="addFest()" >Ajouter festival</button>
-  <button (click)="modifyFirst()" >Modifier 1er</button>
-</div>
+</app-festivals-list>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Festival} from "../../../models/festival";
 
 @Component({
   selector: 'app-festivals-list',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./festivals-list.component.css']
 })
 export class FestivalsListComponent {
-
+  @Input() festivals: Festival[] | undefined
 }
