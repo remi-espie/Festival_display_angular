@@ -5,6 +5,9 @@ import { FestivalsListComponent } from './components/festival/festivals-list/fes
 import { FestivalDetailsComponent } from './components/festival/festival-details/festival-details.component';
 import { MessageComponent } from './components/shared/message/message.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {RouterModule} from "@angular/router";
+import { RootComponent } from './components/root/root.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,12 +15,19 @@ import { ReactiveFormsModule } from '@angular/forms';
     FestivalsListComponent,
     FestivalDetailsComponent,
     MessageComponent,
+    RootComponent,
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    RouterModule.forRoot([
+      {path: 'festivals', component: FestivalsListComponent},
+      {path: 'festival/:id', component: FestivalDetailsComponent},
+      {path: '', component: AppComponent},
+    ]),
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [RootComponent]
 })
 export class AppModule { }

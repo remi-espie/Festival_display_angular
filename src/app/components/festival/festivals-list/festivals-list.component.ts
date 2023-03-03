@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Festival} from "../../../models/festival";
 import {MessageService} from "../../../services/message.service";
-import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-festivals-list',
@@ -12,7 +11,7 @@ export class FestivalsListComponent implements OnInit{
   constructor(public messageService : MessageService) {
   }
 
-  @Input() festivals: Festival[] | undefined
+  @Input() festivals: Festival[] | null = null
 
   selectFestival(festival: Festival) {
     this.messageService.log("Affichage du festival " + festival.name);

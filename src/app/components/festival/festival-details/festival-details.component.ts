@@ -1,13 +1,18 @@
-import {Component, Input, OnChanges,} from '@angular/core';
+import {Component, Input, OnChanges, OnInit,} from '@angular/core';
 import {Festival} from "../../../models/festival";
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from "@angular/router";
+import {FestivaljsonService} from "../../../services/festivaljson.service";
 
 @Component({
   selector: 'app-festival-details',
   templateUrl: './festival-details.component.html',
   styleUrls: ['./festival-details.component.css']
 })
-export class FestivalDetailsComponent implements OnChanges {
+export class FestivalDetailsComponent implements OnChanges, OnInit {
+
+  constructor(private route: ActivatedRoute, private festivalService: FestivaljsonService) {
+  }
 
   @Input() festival: Festival | undefined;
   nameControl: FormControl = new FormControl();
@@ -38,6 +43,20 @@ export class FestivalDetailsComponent implements OnChanges {
       room: [this.festival?.tablemax_1, [Validators.required,
         Validators.min(1)]],
     });
+  }
+
+  ngOnInit(): void {
+    if (this.route.snapshot.paramMap.has('festivalId')) {
+      const id = this.route.snapshot.paramMap.get('festivalId');
+      this.festivalService.getFestival(id).subscribe(
+        (fest) => {
+          this.festival = fest[0];
+          this.update();
+        }
+      );
+    } else {
+      this.update();
+    }
   }
 
 }

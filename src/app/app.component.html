@@ -1,4 +1,5 @@
-<app-festivals-list [festivals]="festivals" (festivalSelect)="festivalChange($event)">
+
+<app-festivals-list [festivals]="festivals | async" (festivalSelect)="festivalChange($event)">
 
 </app-festivals-list>
 

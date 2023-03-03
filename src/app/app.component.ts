@@ -1,12 +1,20 @@
-import {Component, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Festival} from "./models/festival";
+import {Observable} from "rxjs";
+import {FestivaljsonService} from "./services/festivaljson.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnChanges{
+export class AppComponent implements OnInit{
+
+  constructor(private festivalJson: FestivaljsonService) {}
+
+  ngOnInit(): void {
+    this.festivals = this.festivalJson.getFestivals();
+  }
 
   fest1: Festival = new Festival(
      "1",
@@ -35,10 +43,8 @@ export class AppComponent implements OnChanges{
     300,
     50,
   )
-  @Output() festivals: Festival[] = [
-    this.fest1,
-    this.fest2
-  ]
+  @Output() festivals: Observable<Festival[]> | undefined;
+
 
   festivalChange(festival: Festival) {
     this.festivalSelect = festival;
