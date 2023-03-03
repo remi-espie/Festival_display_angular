@@ -29,6 +29,7 @@ import { JeuComponent } from './components/jeu/jeu.component';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
+      {path: 'jeux', component: JeuComponent},
       {path: 'editeurs', component: EditeurComponent},
       {path: 'festivals', component: FestivalsListComponent},
       {path: 'festival/:id', component: FestivalDetailsComponent},

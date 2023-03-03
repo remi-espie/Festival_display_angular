@@ -14,7 +14,7 @@
     <td>{{edit.id}}</td>
     <td>{{edit.name}}</td>
     <td>{{edit.contact}}</td>
-    <td><button (click)="editeur = edit">Selectionner</button></td>
+    <td><button (click)="changeEdit(edit)">Selectionner</button></td>
   </tr>
 </table>
 
@@ -23,7 +23,7 @@
   <label>Contact: <input type="text"
                           formControlName="contact"></label>
 
-  <button type="submit" [disabled]="!editeurGroup.valid">Modifier ou créer festival</button>
+  <button type="submit" [disabled]="!editeurGroup.valid">Modifier ou créer éditeur</button>
 </form>
 
-<button (click)="onDelete()">Supprimer festival</button>
+<button (click)="onDelete()">Supprimer éditeur</button>

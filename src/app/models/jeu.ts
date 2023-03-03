@@ -1,8 +1,8 @@
 export class Jeu {
   constructor(
-    id:string,
+    id: string,
     idedit: string,
-    name:string,
+    name: string,
     type: string,
     ageMin: number,
     ageMax: number,
@@ -11,7 +11,8 @@ export class Jeu {
     duree: number,
   ) {
 
-    this.id=id
+    this.id = id
+    this.idedit = idedit
     this.name = name
     this.type = type
     this.ageMin = ageMin
@@ -19,7 +20,6 @@ export class Jeu {
     this.jMin = jMin
     this.jMax = jMax
     this.duree = duree
-    this.idedit = idedit
   }
 
   public id?: string;

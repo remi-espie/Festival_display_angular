@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Festival} from "../../models/festival";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Editeur} from "../../models/editeur";
 import {EditeurService} from "../../services/editeur.service";
 import {FestivalsService} from "../../services/festivals.service";
@@ -19,7 +19,6 @@ export class EditeurComponent implements OnInit {
   editeurs: Editeur[] | undefined = [];
   festival: Festival | undefined;
   editeur: Editeur | undefined;
-  nameControl: FormControl = new FormControl();
   editeurGroup: FormGroup = new FormGroup({});
 
   fb = new FormBuilder();
@@ -29,7 +28,7 @@ export class EditeurComponent implements OnInit {
     if (this.festival) {
       this.editeurService.getEditeurOf(this.festival!.id!).subscribe(editeurs => {
         this.editeurs = editeurs;
-        this.ngOnChanges();
+        this.changeForm();
       })
     }
   }
@@ -50,11 +49,10 @@ export class EditeurComponent implements OnInit {
 
     this.editeurService.addUpdateEditeur(this.editeur)
     this.editeur = undefined;
-    this.ngOnChanges()
+    this.changeForm()
   }
 
-  ngOnChanges(): void {
-    this.nameControl = new FormControl(this.editeur?.name);
+  changeForm(): void {
     this.editeurGroup = this.fb.group({
       name: [this.editeur?.name, [Validators.required,
         Validators.minLength(4)]],
@@ -69,18 +67,17 @@ export class EditeurComponent implements OnInit {
       this.festival = this.festivals[0];
     });
     this.editeurService.getAllEditeurs().subscribe(editeurs => this.editeurs = editeurs);
-    this.nameControl = new FormControl(this.editeur?.name);
-    this.editeurGroup = this.fb.group({
-      name: [this.editeur?.name, [Validators.required,
-        Validators.minLength(4)]],
-      contact: [this.editeur?.contact, [Validators.required,
-        Validators.minLength(4)]],
-    });
+    this.changeForm()
   }
 
   onDelete() {
     if (this.editeur) {
       this.editeurService.deleteEditeur(this.editeur);
     }
+  }
+
+  changeEdit(edit: Editeur) {
+    this.editeur = edit;
+    this.changeForm()
   }
 }

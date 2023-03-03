@@ -1,1 +1,44 @@
-<p>jeu works!</p>
+<h1>festival-details works!</h1>
+
+<select #edit (change)="changeEdit(edit.value)" >
+  <option *ngFor="let edit of editeurs" [value]="edit.id" >{{edit.name}}</option>
+</select>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Type</th>
+    <th>Age minimum</th>
+    <th>Age maximum</th>
+    <th>Nombre de joueurs minimum</th>
+    <th>Nombre de joueurs maximum</th>
+    <th>Durée d'une partie (en min)</th>
+  </tr>
+  <tr *ngFor="let game of jeux">
+    <td>{{game.id}}</td>
+    <td>{{game.name}}</td>
+    <td>{{game.type}}</td>
+    <td>{{game.ageMin}}</td>
+    <td>{{game.ageMax}}</td>
+    <td>{{game.jMin}}</td>
+    <td>{{game.jMax}}</td>
+    <td>{{game.duree}}</td>
+    <td><button (click)="changeJeu(game)">Selectionner</button></td>
+  </tr>
+</table>
+
+<form [formGroup]="jeuGroup" (ngSubmit)="update()">
+  <label>Name: <input type="text" formControlName="name"></label>
+  <label>Type: <input type="text"
+                         formControlName="type"></label>
+
+  <label>Age minimum: <input type="number" formControlName="ageMin"></label>
+  <label>Age maximum: <input type="number" formControlName="ageMax"></label>
+  <label>Joueur(s) minimum: <input type="number" formControlName="jMin"></label>
+  <label>Joueurs maximum: <input type="number" formControlName="jMax"></label>
+  <label>Durée d'une partie (en min): <input type="number" formControlName="duree"></label>
+  <button type="submit" [disabled]="!jeuGroup.valid">Modifier ou créer jeu</button>
+</form>
+
+<button (click)="onDelete()">Supprimer Jeu</button>
