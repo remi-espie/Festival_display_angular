@@ -21,7 +21,8 @@ export class FestivalsListComponent implements OnInit{
   @Output() festivalSelect = new EventEmitter<Festival>();
 
   ngOnInit(): void {
-    this.messageService.log("Affichage de la liste des festivals - " + this.festivals?.length + " festivals");
+    const len = this.festivals !== undefined ? this.festivals?.length : "0"
+    this.messageService.log("Affichage de la liste des festivals - " + len + " festivals");
   }
 
 }

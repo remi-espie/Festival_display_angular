@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit,} from '@angular/core';
 import {Festival} from "../../../models/festival";
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from "@angular/router";
-import {FestivaljsonService} from "../../../services/festivaljson.service";
+import {FestivalsService} from "../../../services/festivals.service";
 
 @Component({
   selector: 'app-festival-details',
@@ -11,7 +11,7 @@ import {FestivaljsonService} from "../../../services/festivaljson.service";
 })
 export class FestivalDetailsComponent implements OnChanges, OnInit {
 
-  constructor(private route: ActivatedRoute, private festivalService: FestivaljsonService) {
+  constructor(private route: ActivatedRoute, private festivalService: FestivalsService) {
   }
 
   @Input() festival: Festival | undefined;
@@ -25,11 +25,31 @@ export class FestivalDetailsComponent implements OnChanges, OnInit {
   }
 
   update() {
-    if (this.festival) {
+    if (!this.festival) {
+      this.festival = new Festival(
+        Math.floor(Math.random() * 10000).toString(),
+        this.festivalGroup.value.name,
+        this.festivalGroup.value.room,
+        this.festivalGroup.value.entrancePrice,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+      );
+
+    } else {
       this.festival.name = this.festivalGroup.value.name;
       this.festival.tableprice_1 = this.festivalGroup.value.entrancePrice;
       this.festival.tablemax_1 = this.festivalGroup.value.room;
     }
+
+    this.festivalService.addUpdateFestival(this.festival)
+    this.festival = undefined;
+    this.ngOnChanges()
   }
 
   ngOnChanges(): void {
@@ -44,8 +64,11 @@ export class FestivalDetailsComponent implements OnChanges, OnInit {
     });
   }
 
-  ngOnInit(): void {
-    if (this.route.snapshot.paramMap.has('id')) {
+  ngOnInit()
+    :
+    void {
+    if (this.route.snapshot.paramMap.has('id')
+    ) {
       const id = this.route.snapshot.paramMap.get('id');
       this.festivalService.getFestival(id).subscribe(
         (fest) => {
@@ -59,4 +82,11 @@ export class FestivalDetailsComponent implements OnChanges, OnInit {
 
   }
 
+  onDelete() {
+    if (this.festival) {
+      this.festivalService.deleteFestival(this.festival);
+      this.festival = undefined;
+      this.ngOnChanges()
+    }
+  }
 }

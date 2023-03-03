@@ -10,5 +10,7 @@
                           formControlName="entrancePrice"></label>
   <label>Room: <input type="number"
                           formControlName="room"></label>
-  <button type="submit" [disabled]="!festivalGroup.valid">Submit</button>
+  <button type="submit" [disabled]="!festivalGroup.valid">Modifier ou créer festival</button>
 </form>
+
+<button (click)="onDelete()">Supprimer festival</button>

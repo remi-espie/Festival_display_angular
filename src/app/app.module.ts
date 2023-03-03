@@ -13,6 +13,8 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import { EditeurComponent } from './components/editeur/editeur.component';
+import { JeuComponent } from './components/jeu/jeu.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +23,13 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
     FestivalDetailsComponent,
     MessageComponent,
     RootComponent,
+    EditeurComponent,
+    JeuComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
+      {path: 'editeurs', component: EditeurComponent},
       {path: 'festivals', component: FestivalsListComponent},
       {path: 'festival/:id', component: FestivalDetailsComponent},
       {path: '', component: AppComponent},

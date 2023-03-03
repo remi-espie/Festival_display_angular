@@ -56,26 +56,19 @@ export class FestivalsService {
     this.festivalStore.doc<Festival>(this.path + festival.id).delete();
   }
 
-  getFestival(id: String): Observable<Festival> {
+  getFestival(id: String | null): Observable<Festival> {
     const itemDoc = this.festivalStore.doc<Festival>(this.path + id);
     return itemDoc.valueChanges()
       .pipe(
-        map(fest => this.doc2Festival(fest))
+        map(fest => this.json2Festival(fest))
       );
   }
 
 
   json2Festival(json: any): Festival {
     return new Festival(
-      json.name, json.id, json.tablemax_1, json.tablemax_2,
+      json.id, json.name, json.tablemax_1, json.tablemax_2,
       json.tablemax_3, json.tableprice_1, json.tableprice_2, json.tableprice_3,
       json.sqmprice_1, json.sqmprice_2, json.sqmprice_3);
-  }
-
-  doc2Festival(doc: any): Festival {
-    return new Festival(
-      doc.name, doc.id, doc.tablemax_1, doc.tablemax_2,
-      doc.tablemax_3, doc.tableprice_1, doc.tableprice_2, doc.tableprice_3,
-      doc.sqmprice_1, doc.sqmprice_2, doc.sqmprice_3);
   }
 }

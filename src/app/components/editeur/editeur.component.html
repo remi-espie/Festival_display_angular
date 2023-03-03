@@ -1,0 +1,29 @@
+<h1>festival-details works!</h1>
+
+<select #fest (change)="changefest(fest.value)" >
+  <option *ngFor="let fest of festivals" [value]="fest.id" >{{fest.name}}</option>
+</select>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Contact</th>
+  </tr>
+  <tr *ngFor="let edit of editeurs">
+    <td>{{edit.id}}</td>
+    <td>{{edit.name}}</td>
+    <td>{{edit.contact}}</td>
+    <td><button (click)="editeur = edit">Selectionner</button></td>
+  </tr>
+</table>
+
+<form [formGroup]="editeurGroup" (ngSubmit)="update()">
+  <label>Name: <input type="text" formControlName="name"></label>
+  <label>Contact: <input type="text"
+                          formControlName="contact"></label>
+
+  <button type="submit" [disabled]="!editeurGroup.valid">Modifier ou créer festival</button>
+</form>
+
+<button (click)="onDelete()">Supprimer festival</button>
