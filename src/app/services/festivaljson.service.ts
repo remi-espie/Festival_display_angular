@@ -25,11 +25,12 @@ export class FestivaljsonService {
     );
   }
 
-  getFestival(id: string | null): Observable<Festival[]> {
+  getFestival(id: string | null): Observable<Festival> {
     const data = this.getFestivals()
-
     return data.pipe(
-      map(data => data.filter(festival => festival.id === id))
+      map(data =>
+        data.filter(festival => festival.id === id)[0]
+      )
     );
   }
 }

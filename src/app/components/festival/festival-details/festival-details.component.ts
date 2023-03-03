@@ -24,7 +24,6 @@ export class FestivalDetailsComponent implements OnChanges, OnInit {
     if (this.festival) this.festival.name = this.nameControl.value;
   }
 
-
   update() {
     if (this.festival) {
       this.festival.name = this.festivalGroup.value.name;
@@ -46,17 +45,18 @@ export class FestivalDetailsComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    if (this.route.snapshot.paramMap.has('festivalId')) {
-      const id = this.route.snapshot.paramMap.get('festivalId');
+    if (this.route.snapshot.paramMap.has('id')) {
+      const id = this.route.snapshot.paramMap.get('id');
       this.festivalService.getFestival(id).subscribe(
         (fest) => {
-          this.festival = fest[0];
-          this.update();
+          this.festival = fest;
+          this.ngOnChanges()
         }
       );
     } else {
-      this.update();
+      this.ngOnChanges()
     }
+
   }
 
 }
