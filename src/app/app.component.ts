@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Festival} from "./models/festival";
 import {Observable} from "rxjs";
 import {FestivaljsonService} from "./services/festivaljson.service";
+import {FestivalsService} from "./services/festivals.service";
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,10 @@ import {FestivaljsonService} from "./services/festivaljson.service";
 })
 export class AppComponent implements OnInit{
 
-  constructor(private festivalJson: FestivaljsonService) {}
+  constructor(private festivalJson: FestivalsService) {}
 
   ngOnInit(): void {
-    this.festivals = this.festivalJson.getFestivals();
+    this.festivals = this.festivalJson.getAllFestivals();
   }
 
   fest1: Festival = new Festival(
